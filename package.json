@@ -1,0 +1,52 @@
+{
+  "version": "0.0.5",
+  "name": "gcc-min",
+  "description": "Transpile and Minify ECMAScript 6 using Google Closure Compiler",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ndaidong/gcc-min"
+  },
+  "author": "Dong Nguyen <ndaidong@gmail.com> (https://twitter.com/ndaidong)",
+  "bin": {
+    "gccmin": "./bin/index"
+  },
+  "main": "./index.js",
+  "engines": {
+    "node": ">= 6.0"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/tape test/start.js | tap-spec",
+    "coverage": "nyc tape test/start.js | tap-spec",
+    "report": "npm run coverage && ./node_modules/.bin/nyc report --reporter=lcov",
+    "coveralls": "npm run report && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
+    "snyk": "./node_modules/.bin/snyk wizard"
+  },
+  "dependencies": {
+    "bellajs": "latest",
+    "minimist": "latest",
+    "request": "latest"
+  },
+  "devDependencies": {
+    "coveralls": "latest",
+    "nyc": "latest",
+    "snyk": "latest",
+    "tap-spec": "latest",
+    "tape": "latest"
+  },
+  "keywords": [
+    "compile",
+    "minify",
+    "es6",
+    "util"
+  ],
+  "license": "MIT",
+  "maintainers": [
+    "ndaidong <ndaidong@gmail.com>"
+  ],
+  "bugs": {
+    "url": "https://github.com/ndaidong/gcc-min/issues"
+  },
+  "directories": {
+    "test": "test"
+  }
+}
