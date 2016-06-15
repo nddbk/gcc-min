@@ -6,9 +6,11 @@
 var fs = require('fs');
 var path = require('path');
 var exec = require('child_process').execSync;
+
+var bella = require('bellajs');
 var request = require('request');
 
-var pack = require('../package');
+var pack = require('../../../package');
 
 const API = 'https://closure-compiler.appspot.com/compile';
 
@@ -69,12 +71,14 @@ var minify = (file, output) => {
       log.warn(json.warnings);
     } else {
       let repo = pack.repository;
+      let date = bella.date;
+      let sd = date.format('m d, Y h:i');
       let x = [
         '/**',
         ` * ${pack.name} v${pack.version}`,
-        ` * by ${pack.author}`,
-        ` * License: ${pack.license}`,
+        ` * by ${pack.author}, ${sd}`,
         ` * ${repo.type}: ${repo.url}`,
+        ` * License: ${pack.license}`,
         `**/`,
         `;${json.compiledCode}`
       ].join('\n');

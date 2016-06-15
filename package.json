@@ -1,7 +1,7 @@
 {
-  "version": "0.0.3",
+  "version": "0.0.4",
   "name": "gcc-min",
-  "description": "Transpile & Minify ECMAScript 6 using Google Closure Compiler",
+  "description": "Transpile and Minify ECMAScript 6 using Google Closure Compiler",
   "repository": {
     "type": "git",
     "url": "https://github.com/ndaidong/gcc-min"
@@ -22,11 +22,11 @@
     "snyk": "./node_modules/.bin/snyk wizard"
   },
   "dependencies": {
+    "bellajs": "latest",
     "minimist": "latest",
     "request": "latest"
   },
   "devDependencies": {
-    "bellajs": "latest",
     "coveralls": "latest",
     "nyc": "latest",
     "snyk": "latest",
