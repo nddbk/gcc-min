@@ -1,5 +1,5 @@
 {
-  "version": "0.0.2",
+  "version": "0.0.3",
   "name": "gcc-min",
   "description": "Transpile & Minify ECMAScript 6 using Google Closure Compiler",
   "repository": {
@@ -19,12 +19,11 @@
     "coverage": "nyc tape test/start.js | tap-spec",
     "report": "npm run coverage && ./node_modules/.bin/nyc report --reporter=lcov",
     "coveralls": "npm run report && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
-    "build": "node build/minify",
     "snyk": "./node_modules/.bin/snyk wizard"
   },
   "dependencies": {
-    "request": "latest",
-    "commander": "latest"
+    "minimist": "latest",
+    "request": "latest"
   },
   "devDependencies": {
     "bellajs": "latest",

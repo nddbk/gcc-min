@@ -1,16 +1,15 @@
 #!/usr/bin/env node
 
-var commander = require('commander');
+var argv = require('minimist')(process.argv.slice(2));
 
-var main = require('../index');
-var pack = require('../package');
+var prepare = require('../index').prepare;
 
-commander
-  .version(pack.version)
-  .usage('gccmin input output')
-  .arguments('<input> <output>')
-  .action((input, output) => {
-    if (input && output) {
-      main.prepare(input, output);
-    }
-  }).parse(process.argv);
+let ar = argv._ || [];
+
+if (ar.length === 2) {
+  let input = ar[0];
+  let output = ar[1];
+  if (input && output) {
+    prepare(input, output);
+  }
+}
