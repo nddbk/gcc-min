@@ -1,0 +1,16 @@
+#!/usr/bin/env node
+
+var commander = require('commander');
+
+var main = require('../index');
+var pack = require('../package');
+
+commander
+  .version(pack.version)
+  .usage('gccmin input output')
+  .arguments('<input> <output>')
+  .action((input, output) => {
+    if (input && output) {
+      main.prepare(input, output);
+    }
+  }).parse(process.argv);
