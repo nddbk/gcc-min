@@ -10,7 +10,13 @@ var exec = require('child_process').execSync;
 var bella = require('bellajs');
 var request = require('request');
 
-var pack = require('../../../package');
+var pack;
+
+if (fs.existsSync('../../../package')) {
+  pack = require('../../../package');
+} else if (fs.existsSync('../package')) {
+  pack = require('../package');
+}
 
 const API = 'https://closure-compiler.appspot.com/compile';
 
