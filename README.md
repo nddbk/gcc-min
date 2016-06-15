@@ -11,7 +11,7 @@ gccmin src/alpha.js dist/alpha.min.js
 It may be better for local usage:
 
 ```
-sudo npm install gcc-min --save-dev
+npm install gcc-min --save-dev
 ./node_modules/.bin/gccmin src/alpha.js dist/alpha.min.js
 ```
 
