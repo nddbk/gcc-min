@@ -6,17 +6,8 @@
 var fs = require('fs');
 var path = require('path');
 var exec = require('child_process').execSync;
-
-var bella = require('bellajs');
 var request = require('request');
-
-var pack;
-
-if (fs.existsSync('../../../package')) {
-  pack = require('../../../package');
-} else if (fs.existsSync('../package')) {
-  pack = require('../package');
-}
+var bella = require('bellajs');
 
 const API = 'https://closure-compiler.appspot.com/compile';
 
@@ -35,6 +26,16 @@ var log = {
     console.log('\x1b[32m', msg);
   }
 };
+
+var pack;
+
+try {
+  pack = require('../../../package');
+} catch (e) {
+  log.warn('Not found top package info. Use local.');
+  pack = require('../package');
+  pack.__e__ = e;
+}
 
 var send = (source) => {
   return new Promise((resolve, reject) => {
@@ -78,12 +79,14 @@ var minify = (file, output) => {
     } else {
       let repo = pack.repository;
       let date = bella.date;
-      let sd = date.format('m d, Y h:i');
+      let sd = date.utc();
       let x = [
-        '/**',
-        ` * ${pack.name} v${pack.version}`,
-        ` * by ${pack.author}, ${sd}`,
+        `/**`,
+        ` * ${pack.name}`,
+        ` * v${pack.version}`,
+        ` * built: ${sd}`,
         ` * ${repo.type}: ${repo.url}`,
+        ` * author: ${pack.author}`,
         ` * License: ${pack.license}`,
         `**/`,
         `;${json.compiledCode}`
@@ -119,6 +122,5 @@ var prepare = (input, output) => {
 
 module.exports = {
   minify,
-  prepare,
-  log
+  prepare
 };
