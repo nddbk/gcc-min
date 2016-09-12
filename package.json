@@ -6,7 +6,7 @@
     "type": "git",
     "url": "https://github.com/ndaidong/gcc-min"
   },
-  "author": "Dong Nguyen <ndaidong@gmail.com> (https://twitter.com/ndaidong)",
+  "author": "@ndaidong",
   "bin": {
     "gccmin": "./bin/index"
   },
@@ -15,15 +15,17 @@
     "node": ">= 6.0"
   },
   "scripts": {
-    "test": "./node_modules/.bin/tape test/start.js | tap-spec",
+    "test": "tape test/start.js | tap-spec",
     "coverage": "nyc tape test/start.js | tap-spec",
-    "report": "npm run coverage && ./node_modules/.bin/nyc report --reporter=lcov",
-    "coveralls": "npm run report && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
-    "snyk": "./node_modules/.bin/snyk wizard"
+    "report": "npm run coverage && nyc report --reporter=lcov",
+    "coveralls": "npm run report && cat ./coverage/lcov.info | coveralls",
+    "snyk": "snyk wizard"
   },
   "dependencies": {
     "bellajs": "latest",
+    "google-closure-compiler-js": "^20160828.0.1",
     "minimist": "latest",
+    "promise-wtf": "^1.0.0",
     "request": "latest"
   },
   "devDependencies": {
