@@ -8,7 +8,7 @@ var path = require('path');
 var test = require('tape');
 
 var rootDir = '../../';
-var gccmin = require(path.join(rootDir, 'index.js'));
+var gccmin = require(path.join(rootDir, 'index'));
 
 var hasMethod = (ob, m) => {
   return ob[m] && typeof ob[m] === 'function';
@@ -53,14 +53,7 @@ test('Testing minified result', (assert) => {
   }).finally(assert.end);
 });
 
-test('Testing minified result', (assert) => {
-  let f = 'devFile.js';
-  gccmin.compile(f).catch((err) => {
-    assert.deepEquals(err, new Error(`${f} could not be found.`), 'Error must be throwed');
-  }).finally(assert.end);
-});
-
-test('Testing minified result', (assert) => {
+test('Test minifying a not-exist file', (assert) => {
   let f = 'devFile.js';
   gccmin.compile(f).catch((err) => {
     assert.deepEquals(err, new Error(`${f} could not be found.`), 'Error must be throwed');

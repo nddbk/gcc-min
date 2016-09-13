@@ -78,7 +78,9 @@ var handle = (file, output, pkg = {}) => {
         next();
       });
     }
-  ]);
+  ]).then(() => {
+    return r;
+  });
 };
 
 
