@@ -2,7 +2,7 @@
 
 var argv = require('minimist')(process.argv.slice(2));
 
-var prepare = require('../index').prepare;
+var compile = require('../index').compile;
 
 let ar = argv._ || [];
 
@@ -10,6 +10,6 @@ if (ar.length === 2) {
   let input = ar[0];
   let output = ar[1];
   if (input && output) {
-    prepare(input, output);
+    compile(input, output);
   }
 }

@@ -15,6 +15,7 @@
     "node": ">= 6.0"
   },
   "scripts": {
+    "lint": "eslint ./src",
     "test": "tape test/start.js | tap-spec",
     "coverage": "nyc tape test/start.js | tap-spec",
     "report": "npm run coverage && nyc report --reporter=lcov",
@@ -23,13 +24,13 @@
   },
   "dependencies": {
     "bellajs": "latest",
-    "google-closure-compiler-js": "^20160828.0.1",
+    "google-closure-compiler-js": "latest",
     "minimist": "latest",
-    "promise-wtf": "^1.0.0",
-    "request": "latest"
+    "promise-wtf": "latest"
   },
   "devDependencies": {
     "coveralls": "latest",
+    "eslint": "latest",
     "nyc": "latest",
     "snyk": "latest",
     "tap-spec": "latest",
