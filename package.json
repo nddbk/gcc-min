@@ -15,7 +15,7 @@
     "node": ">= 6.0"
   },
   "scripts": {
-    "lint": "eslint ./src",
+    "lint": "eslint ./src ./test",
     "test": "npm run lint && snyk test && tape test/start.js | tap-spec",
     "coverage": "nyc tape test/start.js | tap-spec",
     "report": "npm run coverage && nyc report --reporter=lcov",
