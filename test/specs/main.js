@@ -52,3 +52,17 @@ test('Testing minified result', (assert) => {
     assert.ok(a[8] === expectation, 'Minified code must be correct');
   }).finally(assert.end);
 });
+
+test('Testing minified result', (assert) => {
+  let f = 'devFile.js';
+  gccmin.compile(f).catch((err) => {
+    assert.deepEquals(err, new Error(`${f} could not be found.`), 'Error must be throwed');
+  }).finally(assert.end);
+});
+
+test('Testing minified result', (assert) => {
+  let f = 'devFile.js';
+  gccmin.compile(f).catch((err) => {
+    assert.deepEquals(err, new Error(`${f} could not be found.`), 'Error must be throwed');
+  }).finally(assert.end);
+});

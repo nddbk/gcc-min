@@ -1,7 +1,7 @@
 /**
  * gcc-test
  * v1.2.3
- * built: Tue, 13 Sep 2016 04:46:42 GMT
+ * built: Tue, 13 Sep 2016 06:08:47 GMT
  * git: https://github.com/ndaidong/gcc-min
  * author: @ndaidong
  * License: MIT

@@ -1,6 +1,12 @@
 # gcc-min
 Transpile and Minify ECMAScript 6 using Google Closure Compiler.
 
+[![NPM](https://badge.fury.io/js/gcc-min.svg)](https://badge.fury.io/js/gcc-min)
+![Travis](https://travis-ci.org/ndaidong/gcc-min.svg?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/ndaidong/gcc-min/badge.svg?branch=master)](https://coveralls.io/github/ndaidong/gcc-min?branch=master)
+![devDependency Status](https://david-dm.org/ndaidong/gcc-min.svg)
+[![Known Vulnerabilities](https://snyk.io/test/npm/gcc-min/badge.svg)](https://snyk.io/test/npm/gcc-min)
+
 # Usage
 
 ```
@@ -19,8 +25,8 @@ You can add the shortcut to package.json, in the "script" section:
 
 ```
 "scripts": {
-  "test": "./node_modules/.bin/tape test/start.js | tap-spec",
-  "minify": "./node_modules/.bin/gccmin src/alpha.js dist/alpha.min.js"
+  "test": "tape test/start.js | tap-spec",
+  "minify": "gccmin src/alpha.js dist/alpha.min.js"
 },
 ```
 
