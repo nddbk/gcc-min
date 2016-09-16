@@ -1,5 +1,5 @@
 {
-  "version": "1.0.3",
+  "version": "1.0.4",
   "name": "gcc-min",
   "description": "Transpile and Minify ECMAScript 6 using Google Closure Compiler",
   "repository": {
@@ -16,11 +16,10 @@
   },
   "scripts": {
     "lint": "eslint ./src ./test",
-    "test": "npm run lint && snyk test && tape test/start.js | tap-spec",
-    "coverage": "nyc tape test/start.js | tap-spec",
-    "report": "npm run coverage && nyc report --reporter=lcov",
-    "coveralls": "npm run report && cat ./coverage/lcov.info | coveralls",
-    "snyk": "snyk wizard"
+    "pretest": "npm run lint",
+    "test": "nyc tape test/start.js | tap-spec",
+    "posttest": "nyc report --reporter=lcov && snyk test",
+    "coverage": "npm test && cat ./coverage/lcov.info | coveralls"
   },
   "dependencies": {
     "bellajs": "^5.4.0",
@@ -31,6 +30,7 @@
   "devDependencies": {
     "coveralls": "latest",
     "eslint": "latest",
+    "eslint-config-ggc": "latest",
     "nyc": "latest",
     "snyk": "latest",
     "tap-spec": "latest",

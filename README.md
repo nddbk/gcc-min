@@ -4,23 +4,18 @@ Transpile and Minify ECMAScript 6 using Google Closure Compiler.
 [![NPM](https://badge.fury.io/js/gcc-min.svg)](https://badge.fury.io/js/gcc-min)
 ![Travis](https://travis-ci.org/ndaidong/gcc-min.svg?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/ndaidong/gcc-min/badge.svg?branch=master)](https://coveralls.io/github/ndaidong/gcc-min?branch=master)
-[![Dependency Status](https://www.versioneye.com/user/projects/57d7ae91bf2b4b00342dd062/badge.svg?style=flat)](https://www.versioneye.com/user/projects/57d7ae91bf2b4b00342dd062)
+[![Dependency Status](https://www.versioneye.com/user/projects/57d7ae91bf2b4b00342dd062/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/57d7ae91bf2b4b00342dd062)
 [![Known Vulnerabilities](https://snyk.io/test/npm/gcc-min/badge.svg)](https://snyk.io/test/npm/gcc-min)
 
 
 # Usage
-
-
-#### CLI
-
-Install package globally to get the command "gccmin".
 
 ```
 sudo npm install -g gcc-min
 gccmin src/alpha.js dist/alpha.min.js
 ```
 
-Or use it as local package:
+It may be better for local usage:
 
 ```
 npm install gcc-min --save-dev
@@ -41,41 +36,6 @@ So you can run the command to minify:
 ```
 npm run minify
 ```
-
-#### Programmable
-
-You can use it within your node app:
-
-```
-var gccmin = require('gccmin');
-
-gccmin.compile('src/alpha.js', 'dist/alpha.min.js'); // this is a Promise
-```
-
-or:
-
-```
-import {compile} from 'gccmin';
-
-compile('src/alpha.js', 'dist/alpha.min.js').then(() => {
-  console.log('Compiled and minified');
-}).catch((err) => {
-  console.log(err);
-}).finnaly(() => {
-  console.log('Everything done');
-});
-```
-
-
-## Test
-
-```
-git clone https://github.com/ndaidong/gcc-min.git
-cd gcc-min
-npm install
-npm test
-```
-
 
 # License
 
