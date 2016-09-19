@@ -1,5 +1,5 @@
 {
-  "version": "1.0.5",
+  "version": "1.0.6",
   "name": "gcc-min",
   "description": "Transpile and Minify ECMAScript 6 using Google Closure Compiler",
   "repository": {
