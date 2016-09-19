@@ -16,16 +16,16 @@
   },
   "scripts": {
     "lint": "eslint ./src ./test",
-    "pretest": "npm run lint",
+    "pretest": "npm run lint && snyk test",
     "test": "nyc tape test/start.js | tap-spec",
-    "posttest": "nyc report --reporter=lcov && snyk test",
-    "coverage": "npm test && cat ./coverage/lcov.info | coveralls"
+    "posttest": "nyc report --reporter=lcov",
+    "coveralls": "npm test && cat ./coverage/lcov.info | coveralls"
   },
   "dependencies": {
     "bellajs": "^5.4.12",
-    "google-closure-compiler-js": "^20160828.0.1",
+    "google-closure-compiler-js": "^20160916.0.0",
     "minimist": "^1.2.0",
-    "promise-wtf": "^1.0.21"
+    "promise-wtf": "^1.1.0"
   },
   "devDependencies": {
     "coveralls": "latest",
