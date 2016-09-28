@@ -4,7 +4,7 @@ Transpile and Minify ECMAScript 6 using Google Closure Compiler.
 [![NPM](https://badge.fury.io/js/gcc-min.svg)](https://badge.fury.io/js/gcc-min)
 ![Travis](https://travis-ci.org/ndaidong/gcc-min.svg?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/ndaidong/gcc-min/badge.svg?branch=master)](https://coveralls.io/github/ndaidong/gcc-min?branch=master)
-[![Dependency Status](https://www.versioneye.com/user/projects/57e8df6fbd6fa600512e3a70/badge.svg?style=flat)](https://www.versioneye.com/user/projects/57e8df6fbd6fa600512e3a70)
+[![Dependency Status](https://www.versioneye.com/user/projects/57eb730079806f002f4afa29/badge.svg?style=flat)](https://www.versioneye.com/user/projects/57eb730079806f002f4afa29)
 [![Known Vulnerabilities](https://snyk.io/test/npm/gcc-min/badge.svg)](https://snyk.io/test/npm/gcc-min)
 
 
