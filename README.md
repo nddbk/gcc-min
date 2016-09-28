@@ -4,7 +4,7 @@ Transpile and Minify ECMAScript 6 using Google Closure Compiler.
 [![NPM](https://badge.fury.io/js/gcc-min.svg)](https://badge.fury.io/js/gcc-min)
 ![Travis](https://travis-ci.org/ndaidong/gcc-min.svg?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/ndaidong/gcc-min/badge.svg?branch=master)](https://coveralls.io/github/ndaidong/gcc-min?branch=master)
-[![Dependency Status](https://www.versioneye.com/user/projects/57d7ae91bf2b4b00342dd062/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/57d7ae91bf2b4b00342dd062)
+[![Dependency Status](https://www.versioneye.com/user/projects/57e8df6fbd6fa600512e3a70/badge.svg?style=flat)](https://www.versioneye.com/user/projects/57e8df6fbd6fa600512e3a70)
 [![Known Vulnerabilities](https://snyk.io/test/npm/gcc-min/badge.svg)](https://snyk.io/test/npm/gcc-min)
 
 
@@ -35,6 +35,16 @@ So you can run the command to minify:
 
 ```
 npm run minify
+```
+
+
+# Test
+
+```
+git clone https://github.com/ndaidong/gcc-min.git
+cd gcc-min
+npm install
+npm test
 ```
 
 # License
