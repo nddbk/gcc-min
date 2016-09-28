@@ -1,5 +1,5 @@
 {
-  "version": "1.0.6",
+  "version": "1.0.7",
   "name": "gcc-min",
   "description": "Transpile and Minify ECMAScript 6 using Google Closure Compiler",
   "repository": {
@@ -22,10 +22,10 @@
     "coveralls": "npm test && cat ./coverage/lcov.info | coveralls"
   },
   "dependencies": {
-    "bellajs": "^5.4.12",
-    "google-closure-compiler-js": "^20160916.0.0",
-    "minimist": "^1.2.0",
-    "promise-wtf": "^1.1.0"
+    "bellajs": "5.*.*",
+    "google-closure-compiler-js": "latest",
+    "minimist": "1.*.*",
+    "promise-wtf": "1.*.*"
   },
   "devDependencies": {
     "coveralls": "latest",
