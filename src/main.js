@@ -64,7 +64,7 @@ var compile = (source, target, fname = '', pkg = {}) => {
     let repo = pkg.repository || pack.repository;
     let auth = pkg.author || pack.author;
     let lice = pkg.license || pack.license;
-    let name = pkg.name || pack.name;
+    let name = fname || pkg.name || pack.name;
     let vers = pkg.version || pack.version;
     let date = bella.date;
     let sd = date.utc();
@@ -120,7 +120,8 @@ var compile = (source, target, fname = '', pkg = {}) => {
     return resolve({
       source: input,
       devFile,
-      proFile
+      proFile,
+      fname
     });
   });
 };

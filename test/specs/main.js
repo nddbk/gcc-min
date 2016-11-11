@@ -47,7 +47,7 @@ test('Testing minified result', (assert) => {
     let a = s.split('\n');
     assert.ok(s.length > 0 && a.length > 5, 'Development file must be not empty');
 
-    assert.ok(a[1] === ` * ${pkgFake.name}`, 'Package name must be correct');
+    assert.ok(a[1] === ` * ${output.fname}`, 'Package name must be correct');
     assert.ok(a[2] === ` * v${pkgFake.version}`, 'Package version must be correct');
     assert.ok(a[3].startsWith(' * built:'), 'Package built time must be showed');
     assert.ok(a[4] === ` * git: ${pkgFake.repository.url}`, 'Package repository must be correct');
