@@ -11,15 +11,21 @@ Transpile and Minify ECMAScript 6 using Google Closure Compiler.
 # Usage
 
 ```
+gccmin SOURCE_FILE OUTPUT_DIR EXPORT_NAME
+```
+
+Example:
+
+```
 sudo npm install -g gcc-min
-gccmin src/alpha.js dist/alpha.min.js
+gccmin src/alpha.js dist alpha
 ```
 
 It may be better for local usage:
 
 ```
 npm install gcc-min --save-dev
-./node_modules/.bin/gccmin src/alpha.js dist/alpha.min.js
+./node_modules/.bin/gccmin src/alpha.js dist alpha
 ```
 
 You can add the shortcut to package.json, in the "script" section:
@@ -27,15 +33,17 @@ You can add the shortcut to package.json, in the "script" section:
 ```
 "scripts": {
   "test": "tape test/start.js | tap-spec",
-  "minify": "gccmin src/alpha.js dist/alpha.min.js"
+  "build": "gccmin src/alpha.js dist alpha"
 },
 ```
 
 So you can run the command to minify:
 
 ```
-npm run minify
+npm run build
 ```
+
+It will create folder "dist", and put 2 files alpha.js and alpha.min.js into there.
 
 
 # Test

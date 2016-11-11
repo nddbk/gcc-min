@@ -1,5 +1,5 @@
 /**
- * Transpile & Minify JS code using Google Closure Complier
+ * Smart builder JS code
  * @ndaidong
 **/
 
@@ -9,11 +9,9 @@ var exec = require('child_process').execSync;
 var bella = require('bellajs');
 var Promise = require('promise-wtf');
 
-var compiler = require('google-closure-compiler-js');
-
-const LEVEL = 'SIMPLE_OPTIMIZATIONS';
-const LANG_IN = 'ES6';
-const LANG_OUT = 'ES5';
+var parser = require('shift-parser');
+var codegen = require('shift-codegen').default;
+var babel = require('babel-core');
 
 var pack;
 
@@ -24,87 +22,106 @@ try {
   pack.__e__ = e;
 }
 
-var handle = (file, output, pkg = {}) => {
-
-  let s = '';
-  let r = {};
-
-  return Promise.series([
-    (next) => {
-      fs.readFile(file, 'utf8', (err, content) => {
-        if (err) {
-          console.log(err);
+var transpile = (code) => {
+  return babel.transform(code, {
+    presets: [
+      [
+        'env', {
+          targets: {
+            browsers: [
+              'safari 9',
+              'ie 11',
+              'Android 4',
+              'iOS 7'
+            ]
+          }
         }
-        s = content;
-        next();
-      });
-    },
-    (next) => {
-      r = compiler.compile({
-        compilationLevel: LEVEL,
-        languageIn: LANG_IN,
-        languageOut: LANG_OUT,
-        jsCode: [{src: s}]
-      });
-      next();
-    },
-    (next) => {
-      let repo = pkg.repository || pack.repository;
-      let auth = pkg.author || pack.author;
-      let lice = pkg.license || pack.license;
-      let name = pkg.name || pack.name;
-      let vers = pkg.version || pack.version;
-      let date = bella.date;
-      let sd = date.utc();
-
-      r.fileContent = [
-        `/**`,
-        ` * ${name}`,
-        ` * v${vers}`,
-        ` * built: ${sd}`,
-        ` * ${repo.type}: ${repo.url}`,
-        ` * author: ${auth}`,
-        ` * License: ${lice}`,
-        `**/`,
-        `;${r.compiledCode}`
-      ].join('\n');
-      next();
-    },
-    (next) => {
-      fs.writeFile(output, r.fileContent, 'utf8', (err) => {
-        if (err) {
-          console.log(err);
-        }
-        next();
-      });
-    }
-  ]).then(() => {
-    return r;
+      ]
+    ],
+    plugins: [
+      'transform-remove-strict-mode'
+    ],
+    comments: false,
+    sourceMaps: true
   });
 };
 
+var jsminify = (code) => {
+  let ast = parser.parseScript(code);
+  return codegen(ast);
+};
 
-var compile = (input, output, pkg = {}) => {
+var compile = (source, target, fname = '', pkg = {}) => {
   return new Promise((resolve, reject) => {
-    if (!fs.existsSync(input)) {
-      return reject(new Error(`${input} could not be found.`));
+
+    if (!fs.existsSync(source)) {
+      return reject(new Error(`${source} could not be found.`));
     }
-    if (!path.extname(input)) {
-      input += '/main.js';
+    if (!path.extname(source)) {
+      source += '/main.js';
     }
+
+    let repo = pkg.repository || pack.repository;
+    let auth = pkg.author || pack.author;
+    let lice = pkg.license || pack.license;
     let name = pkg.name || pack.name;
+    let vers = pkg.version || pack.version;
+    let date = bella.date;
+    let sd = date.utc();
 
-    if (!path.extname(output)) {
-      output += `/${name}.min.js`;
+    let devOutput = `${target}/${name}.js`;
+    let proOutput = `${target}/${name}.min.js`;
+
+    let stat = fs.statSync(target);
+    if (stat.isDirectory()) {
+      exec('rm -rf ' + target);
+      exec('mkdir ' + target);
     }
-    let dir = path.dirname(output);
-    exec('rm -rf ' + dir);
-    exec('mkdir ' + dir);
 
-    let i = path.normalize(input);
-    let o = path.normalize(output);
+    let input = path.normalize(source);
+    let devFile = path.normalize(devOutput);
+    let proFile = path.normalize(proOutput);
 
-    return resolve(handle(i, o, pkg));
+
+    let content = fs.readFileSync(input, 'utf8');
+
+    let r = transpile(content);
+    let code = r.code;
+
+    let sdev = [
+      `/**`,
+      ` * ${name}`,
+      ` * v${vers}`,
+      ` * built: ${sd}`,
+      ` * ${repo.type}: ${repo.url}`,
+      ` * author: ${auth}`,
+      ` * License: ${lice}`,
+      `**/\n`,
+      code
+    ].join('\n');
+
+    fs.writeFileSync(devFile, sdev, 'utf8');
+
+    let x = jsminify(code);
+    if (!x.startsWith(';')) {
+      x = ';' + x;
+    }
+    if (!x.endsWith(';')) {
+      x += ';';
+    }
+
+    let spro = [
+      `// ${name}@${vers}, by ${auth} - built on ${sd} - published under ${lice} license`,
+      x
+    ].join('\n');
+
+    fs.writeFileSync(proFile, spro, 'utf8');
+
+    return resolve({
+      source: input,
+      devFile,
+      proFile
+    });
   });
 };
 

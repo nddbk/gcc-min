@@ -6,10 +6,11 @@ var compile = require('../index').compile;
 
 let ar = argv._ || [];
 
-if (ar.length === 2) {
-  let input = ar[0];
-  let output = ar[1];
-  if (input && output) {
-    compile(input, output);
+if (ar.length === 2 || ar.length === 3) {
+  let source = ar[0];
+  let target = ar[1];
+  let name = ar[2] || '';
+  if (source && target) {
+    compile(source, target, name);
   }
 }
