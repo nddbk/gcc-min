@@ -1,22 +1,46 @@
 #!/usr/bin/env node
 
-var argv = require('minimist')(process.argv.slice(2));
+var fs = require('fs');
+var path = require('path');
 
 var compile = require('../index').compile;
 
-let ar = argv._ || [];
+var getPackage = () => {
+  let content = fs.readFileSync('package.json', 'utf8');
+  return JSON.parse(content) || null;
+};
 
-if (ar.length === 2 || ar.length === 3) {
-  let source = ar[0];
-  let target = ar[1];
-  let name = ar[2] || '';
-  if (source && target) {
-    compile(source, target, name).then((output) => {
-      console.log('Done');
-      console.log(output);
-    }).catch((err) => {
-      console.log('Failed');
-      console.log(err);
-    });
+let pack = getPackage();
+if (pack || !pack.gccmin) {
+  let conf = pack.gccmin;
+  let source = conf.source;
+  if (!path.extname(source)) {
+    source += '/main.js';
   }
+  if (!fs.existsSync(source)) {
+    throw new Error(`${source} could not be found.`);
+  }
+
+  let {
+    repository,
+    author,
+    license,
+    name,
+    description,
+    version
+  } = pack;
+
+  Object.assign(conf, {
+    repository,
+    author,
+    license,
+    name,
+    description,
+    version
+  });
+
+  conf.code = fs.readFileSync(source, 'utf8');
+
+  let output = compile(conf);
+  console.log(output);
 }

@@ -5,11 +5,8 @@ logs
 
 # Runtime data
 *.pid
-*.lock
 *.seed
 
 node_modules
 coverage
 .nyc_output
-
-test/data/output

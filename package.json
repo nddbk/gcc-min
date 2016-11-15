@@ -1,7 +1,7 @@
 {
-  "version": "2.0.2",
+  "version": "3.0.0",
   "name": "gcc-min",
-  "description": "Transpile and Minify ECMAScript 6 using Google Closure Compiler",
+  "description": "Just write scripts for Node.js environment, then build to use in the browsers",
   "repository": {
     "type": "git",
     "url": "https://github.com/ndaidong/gcc-min"
@@ -27,8 +27,6 @@
     "babel-plugin-transform-remove-strict-mode": "0.x.x",
     "babel-preset-env": "0.x.x",
     "bellajs": "6.x.x",
-    "minimist": "1.x.x",
-    "promise-wtf": "1.x.x",
     "shift-codegen": "5.x.x",
     "shift-parser": "5.x.x"
   },
@@ -48,13 +46,10 @@
     "util"
   ],
   "license": "MIT",
-  "maintainers": [
-    "ndaidong <ndaidong@gmail.com>"
-  ],
-  "bugs": {
-    "url": "https://github.com/ndaidong/gcc-min/issues"
-  },
-  "directories": {
-    "test": "test"
+  "gccmin": {
+    "source": "./test/data/sample-math.js",
+    "target": "./test/data/output",
+    "filename": "sample",
+    "globalVar": "sampleMath"
   }
 }
