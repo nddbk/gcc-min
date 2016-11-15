@@ -72,6 +72,10 @@ var compile = (source, target, fname = '', pkg = {}) => {
     let devOutput = `${target}/${name}.js`;
     let proOutput = `${target}/${name}.min.js`;
 
+    if (!fs.existsSync(target)) {
+      exec('mkdir ' + target);
+    }
+
     let stat = fs.statSync(target);
     if (stat.isDirectory()) {
       exec('rm -rf ' + target);
