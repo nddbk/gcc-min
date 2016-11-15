@@ -7,20 +7,30 @@ var fs = require('fs');
 var path = require('path');
 var exec = require('child_process').execSync;
 var bella = require('bellajs');
-var Promise = require('promise-wtf');
 
 var parser = require('shift-parser');
 var codegen = require('shift-codegen').default;
 var babel = require('babel-core');
 
-var pack;
+const TEMPLATE = `
+;((name, factory) => {
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports = factory();
+  } else {
+    let root = window || {};
+    if (root.define && root.define.amd) {
+      root.define([], factory);
+    } else if (root.exports) {
+      root.exports = factory();
+    } else {
+      root[name] = factory();
+    }
+  }
+})('{{globalVar}}', () => {
+  {{code}}
+});
+`;
 
-try {
-  pack = require('../../../package');
-} catch (e) {
-  pack = require('../package');
-  pack.__e__ = e;
-}
 
 var transpile = (code) => {
   return babel.transform(code, {
@@ -51,83 +61,92 @@ var jsminify = (code) => {
   return codegen(ast);
 };
 
-var compile = (source, target, fname = '', pkg = {}) => {
-  return new Promise((resolve, reject) => {
+var compile = (opt) => {
 
-    if (!fs.existsSync(source)) {
-      return reject(new Error(`${source} could not be found.`));
+  let {
+    source,
+    target,
+    filename,
+    globalVar,
+    repository: repo,
+    author,
+    license,
+    name,
+    description,
+    version,
+    code
+  } = opt;
+
+  let date = bella.date;
+  let sd = date.utc();
+
+  let output = filename || name;
+  let devOutput = `${target}/${output}.js`;
+  let proOutput = `${target}/${output}.min.js`;
+
+  if (fs.existsSync(target)) {
+    exec('rm -rf ' + target);
+  }
+  exec('mkdir ' + target);
+
+  let devFile = path.normalize(devOutput);
+  let proFile = path.normalize(proOutput);
+
+
+  let template = TEMPLATE;
+
+  let glovar = globalVar || name;
+  let s = template.replace('{{code}}', code.replace('module.exports =', 'return')).replace('{{globalVar}}', glovar);
+  let r = transpile(s);
+  let content = r.code;
+
+  let sdev = [
+    `/**`,
+    ` * ${name}`,
+    ` * v${version}`,
+    ` * built: ${sd}`,
+    ` * ${repo.type}: ${repo.url}`,
+    ` * author: ${author}`,
+    ` * License: ${license}`,
+    `**/\n`,
+    content
+  ].join('\n');
+
+  fs.writeFileSync(devFile, sdev, 'utf8');
+
+  let min = jsminify(sdev);
+  if (!min.startsWith(';')) {
+    min = ';' + min;
+  }
+  if (!min.endsWith(';')) {
+    min += ';';
+  }
+
+  let spro = [
+    `// ${name}@${version}, by ${author} - built on ${sd} - published under ${license} license`,
+    min
+  ].join('\n');
+
+  fs.writeFileSync(proFile, spro, 'utf8');
+
+  return {
+    input: {
+      source,
+      target,
+      filename,
+      globalVar,
+      repository: repo,
+      author,
+      license,
+      name,
+      description,
+      version
+    },
+    output: {
+      development: devFile,
+      production: proFile
     }
-    if (!path.extname(source)) {
-      source += '/main.js';
-    }
-
-    let repo = pkg.repository || pack.repository;
-    let auth = pkg.author || pack.author;
-    let lice = pkg.license || pack.license;
-    let name = fname || pkg.name || pack.name;
-    let vers = pkg.version || pack.version;
-    let date = bella.date;
-    let sd = date.utc();
-
-    let devOutput = `${target}/${name}.js`;
-    let proOutput = `${target}/${name}.min.js`;
-
-    if (!fs.existsSync(target)) {
-      exec('mkdir ' + target);
-    }
-
-    let stat = fs.statSync(target);
-    if (stat.isDirectory()) {
-      exec('rm -rf ' + target);
-      exec('mkdir ' + target);
-    }
-
-    let input = path.normalize(source);
-    let devFile = path.normalize(devOutput);
-    let proFile = path.normalize(proOutput);
-
-
-    let content = fs.readFileSync(input, 'utf8');
-
-    let r = transpile(content);
-    let code = r.code;
-
-    let sdev = [
-      `/**`,
-      ` * ${name}`,
-      ` * v${vers}`,
-      ` * built: ${sd}`,
-      ` * ${repo.type}: ${repo.url}`,
-      ` * author: ${auth}`,
-      ` * License: ${lice}`,
-      `**/\n`,
-      code
-    ].join('\n');
-
-    fs.writeFileSync(devFile, sdev, 'utf8');
-
-    let x = jsminify(code);
-    if (!x.startsWith(';')) {
-      x = ';' + x;
-    }
-    if (!x.endsWith(';')) {
-      x += ';';
-    }
-
-    let spro = [
-      `// ${name}@${vers}, by ${auth} - built on ${sd} - published under ${lice} license`,
-      x
-    ].join('\n');
-
-    fs.writeFileSync(proFile, spro, 'utf8');
-
-    return resolve({
-      source: input,
-      devFile,
-      proFile,
-      fname
-    });
-  });
+  };
 };
 
 module.exports = {

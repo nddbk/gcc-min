@@ -1,5 +1,5 @@
 # gcc-min
-Transpile and Minify ECMAScript 6 using Google Closure Compiler.
+Just write scripts for Node.js environment, then build to use in the browsers.
 
 [![NPM](https://badge.fury.io/js/gcc-min.svg)](https://badge.fury.io/js/gcc-min)
 [![Build Status](https://travis-ci.org/ndaidong/gcc-min.svg?branch=master)](https://travis-ci.org/ndaidong/gcc-min)
@@ -10,40 +10,43 @@ Transpile and Minify ECMAScript 6 using Google Closure Compiler.
 
 # Usage
 
-```
-gccmin SOURCE_FILE OUTPUT_DIR EXPORT_NAME
-```
+In order to use gcc-min, please follow the steps as below:
 
-Example:
-
-```
-sudo npm install -g gcc-min
-gccmin src/alpha.js dist alpha
-```
-
-It may be better for local usage:
+#### 1, Install and save gcc-min to devDependencies
 
 ```
 npm install gcc-min --save-dev
-./node_modules/.bin/gccmin src/alpha.js dist alpha
 ```
 
-You can add the shortcut to package.json, in the "script" section:
+#### 2, Update package.json with *gccmin* property
+
+```
+"gccmin": {
+  "source": "PATH_TO_SOURCE_FILE",
+  "target": "WHERE_TO_OUTPUT",
+  "filename": "NAME_OF_OUTPUT_FILE",
+  "globalVar": "GLOBAL_VAR_NAME"
+}
+```
+
+#### 2, Add shortcut command to the "script" section
 
 ```
 "scripts": {
-  "test": "tape test/start.js | tap-spec",
-  "build": "gccmin src/alpha.js dist alpha"
+  "build": "gccmin"
 },
 ```
 
-So you can run the command to minify:
+So you can run the command to build:
 
 ```
 npm run build
 ```
 
-It will create folder "dist", and put 2 files alpha.js and alpha.min.js into there.
+It will parse your package.json file, get the values in "gccmin" then build the module with these specified configurations.
+
+
+For better understanding, please refer [this live example](https://github.com/ndaidong/bellajs/blob/master/package.json).
 
 
 # Test
