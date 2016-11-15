@@ -29,7 +29,7 @@ npm install gcc-min --save-dev
 }
 ```
 
-#### 2, Add shortcut command to the "script" section
+#### 3, Add shortcut command to the "script" section
 
 ```
 "scripts": {
