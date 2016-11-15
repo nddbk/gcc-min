@@ -11,8 +11,9 @@ if (ar.length === 2 || ar.length === 3) {
   let target = ar[1];
   let name = ar[2] || '';
   if (source && target) {
-    compile(source, target, name).then(() => {
+    compile(source, target, name).then((output) => {
       console.log('Done');
+      console.log(output);
     }).catch((err) => {
       console.log('Failed');
       console.log(err);
