@@ -1,5 +1,5 @@
 {
-  "version": "3.0.1",
+  "version": "3.0.2",
   "name": "gcc-min",
   "description": "Just write scripts for Node.js environment, then build to use in the browsers",
   "repository": {
