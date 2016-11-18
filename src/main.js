@@ -77,7 +77,7 @@ var compile = (opt) => {
     code
   } = opt;
 
-  let date = bella.date;
+  let date = bella.date();
   let sd = date.utc();
 
   let output = filename || name;
