@@ -21,6 +21,8 @@ if (pack || !pack.gccmin) {
     throw new Error(`${source} could not be found.`);
   }
 
+  conf.source = source;
+
   let {
     repository,
     author,
@@ -34,10 +36,13 @@ if (pack || !pack.gccmin) {
     repository,
     author,
     license,
-    name,
     description,
     version
   });
+
+  if (!conf.name) {
+    conf.name = name;
+  }
 
   conf.code = fs.readFileSync(source, 'utf8');
 
