@@ -1,5 +1,5 @@
 {
-  "version": "3.0.2",
+  "version": "3.0.21",
   "name": "gcc-min",
   "description": "Just write scripts for Node.js environment, then build to use in the browsers",
   "repository": {
@@ -16,7 +16,8 @@
   },
   "scripts": {
     "lint": "eslint ./src ./test",
-    "pretest": "npm run lint && snyk test",
+    "nsp": "nsp check --output checkstyle",
+    "pretest": "npm run lint && npm run nsp",
     "tape": "nyc tape test/start.js | tap-spec",
     "test": "npm run tape",
     "posttest": "nyc report --reporter=lcov",
@@ -31,13 +32,13 @@
     "shift-parser": "5.x.x"
   },
   "devDependencies": {
-    "coveralls": "latest",
-    "eslint": "latest",
-    "eslint-config-ggc": "latest",
-    "nyc": "latest",
-    "snyk": "latest",
-    "tap-spec": "latest",
-    "tape": "latest"
+    "coveralls": "2.x.x",
+    "eslint": "3.x.x",
+    "eslint-config-ggc": "1.x.x",
+    "nsp": "2.x.x",
+    "nyc": "10.x.x",
+    "tap-spec": "4.x.x",
+    "tape": "4.x.x"
   },
   "keywords": [
     "compile",

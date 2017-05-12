@@ -1,7 +1,7 @@
 /**
  * gcc-min
- * v3.0.1
- * built: Fri, 18 Nov 2016 07:37:23 GMT
+ * v3.0.2
+ * built: Fri, 12 May 2017 02:38:53 GMT
  * git: https://github.com/ndaidong/gcc-min
  * author: @ndaidong
  * License: MIT
