@@ -1,5 +1,5 @@
 {
-  "version": "3.1.0",
+  "version": "3.1.1",
   "name": "gcc-min",
   "description": "Just write scripts for Node.js environment, then build to use in the browsers",
   "repository": {
@@ -23,13 +23,14 @@
     "posttest": "nyc report --reporter=lcov",
     "coveralls": "npm test && cat ./coverage/lcov.info | coveralls"
   },
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "babel-core": "6.x.x",
     "babel-plugin-transform-remove-strict-mode": "0.x.x",
     "babel-preset-env": "1.x.x",
     "bellajs": "6.x.x",
-    "butternut": "0.x.x",
+    "butternut": "0.x.x"
+  },
+  "devDependencies": {
     "coveralls": "2.x.x",
     "eslint": "3.x.x",
     "eslint-config-ggc": "1.x.x",
