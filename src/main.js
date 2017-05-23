@@ -8,9 +8,8 @@ var path = require('path');
 var exec = require('child_process').execSync;
 var bella = require('bellajs');
 
-var parser = require('shift-parser');
-var codegen = require('shift-codegen').default;
 var babel = require('babel-core');
+var butternut = require('butternut');
 
 const TEMPLATE = `
 ;((name, factory) => {
@@ -31,7 +30,6 @@ const TEMPLATE = `
 });
 `;
 
-
 var transpile = (code) => {
   return babel.transform(code, {
     presets: [
@@ -39,6 +37,7 @@ var transpile = (code) => {
         'env', {
           targets: {
             browsers: [
+              'last 2 versions',
               'safari 9',
               'ie 11',
               'Android 4',
@@ -56,9 +55,11 @@ var transpile = (code) => {
   });
 };
 
-var jsminify = (code) => {
-  let ast = parser.parseScript(code);
-  return codegen(ast);
+var jsminify = (source = '') => {
+  let {code} = butternut.squash(source, {
+    check: true
+  });
+  return code;
 };
 
 var compile = (opt) => {
@@ -108,8 +109,9 @@ var compile = (opt) => {
     ` * ${repo.type}: ${repo.url}`,
     ` * author: ${author}`,
     ` * License: ${license}`,
-    `**/\n`,
-    content
+    `**/`,
+    content,
+    ''
   ].join('\n');
 
   fs.writeFileSync(devFile, sdev, 'utf8');

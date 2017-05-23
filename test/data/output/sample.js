@@ -1,12 +1,11 @@
 /**
  * gcc-min
- * v3.0.2
- * built: Fri, 12 May 2017 02:38:53 GMT
+ * v3.1.0
+ * built: Tue, 23 May 2017 10:13:59 GMT
  * git: https://github.com/ndaidong/gcc-min
  * author: @ndaidong
  * License: MIT
 **/
-
 
 ;(function (name, factory) {
   if (typeof module !== 'undefined' && module.exports) {
