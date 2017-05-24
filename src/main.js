@@ -8,8 +8,8 @@ var path = require('path');
 var exec = require('child_process').execSync;
 var bella = require('bellajs');
 
-var babel = require('babel-core');
-var butternut = require('butternut');
+var transpile = require('./transpile');
+var minify = require('./minify');
 
 const TEMPLATE = `
 ;((name, factory) => {
@@ -18,7 +18,7 @@ const TEMPLATE = `
   } else {
     let root = window || {};
     if (root.define && root.define.amd) {
-      root.define([], factory);
+      root.define('{{globalVar}}', [], factory);
     } else if (root.exports) {
       root.exports = factory();
     } else {
@@ -29,38 +29,6 @@ const TEMPLATE = `
   {{code}}
 });
 `;
-
-var transpile = (code) => {
-  return babel.transform(code, {
-    presets: [
-      [
-        'env', {
-          targets: {
-            browsers: [
-              'last 2 versions',
-              'safari 9',
-              'ie 11',
-              'Android 4',
-              'iOS 7'
-            ]
-          }
-        }
-      ]
-    ],
-    plugins: [
-      'transform-remove-strict-mode'
-    ],
-    comments: false,
-    sourceMaps: true
-  });
-};
-
-var jsminify = (source = '') => {
-  let {code} = butternut.squash(source, {
-    check: true
-  });
-  return code;
-};
 
 var compile = (opt) => {
 
@@ -97,9 +65,10 @@ var compile = (opt) => {
   let template = TEMPLATE;
 
   let glovar = globalVar || name;
-  let s = template.replace('{{code}}', code.replace('module.exports =', 'return')).replace('{{globalVar}}', glovar);
-  let r = transpile(s);
-  let content = r.code;
+  let s = template.replace('{{code}}', code.replace('module.exports =', 'return'))
+                  .replace(new RegExp('{{globalVar}}', 'gi'), glovar);
+
+  let {code: content} = transpile(s);
 
   let sdev = [
     `/**`,
@@ -116,12 +85,9 @@ var compile = (opt) => {
 
   fs.writeFileSync(devFile, sdev, 'utf8');
 
-  let min = jsminify(sdev);
+  let min = minify(sdev);
   if (!min.startsWith(';')) {
     min = ';' + min;
-  }
-  if (!min.endsWith(';')) {
-    min += ';';
   }
 
   let spro = [

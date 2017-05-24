@@ -1,7 +1,7 @@
 /**
  * gcc-min
  * v3.1.1
- * built: Tue, 23 May 2017 10:36:20 GMT
+ * built: Wed, 24 May 2017 02:34:32 GMT
  * git: https://github.com/ndaidong/gcc-min
  * author: @ndaidong
  * License: MIT
@@ -13,7 +13,7 @@
   } else {
     var root = window || {};
     if (root.define && root.define.amd) {
-      root.define([], factory);
+      root.define('sampleMath', [], factory);
     } else if (root.exports) {
       root.exports = factory();
     } else {
