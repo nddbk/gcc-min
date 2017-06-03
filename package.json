@@ -1,5 +1,5 @@
 {
-  "version": "3.1.2",
+  "version": "4.0.0",
   "name": "gcc-min",
   "description": "Just write scripts for Node.js environment, then build to use in the browsers",
   "repository": {
@@ -8,26 +8,33 @@
   },
   "author": "@ndaidong",
   "bin": {
-    "gccmin": "./bin/index"
+    "gccmin": "./builder/index"
   },
   "main": "./index.js",
   "engines": {
-    "node": ">= 6.0"
+    "node": ">= 7.6"
   },
   "scripts": {
-    "lint": "eslint ./src ./test",
+    "lint": "eslint ./src ./tests",
     "nsp": "nsp check --output checkstyle",
     "pretest": "npm run lint && npm run nsp",
-    "tape": "nyc tape test/start.js | tap-spec",
+    "tape": "npm run build && nyc tape tests/start.js | tap-spec",
     "test": "npm run tape",
     "posttest": "nyc report --reporter=lcov",
-    "coveralls": "npm test && cat ./coverage/lcov.info | coveralls"
+    "coveralls": "npm test && cat ./coverage/lcov.info | coveralls",
+    "reset": "node bin/reset",
+    "build": "node ./builder/index -e ../tests/data/main.js -n math -o ../tests/data/output -p ../tests/data/package.json"
   },
   "dependencies": {
-    "babel-core": "6.x.x",
-    "babel-plugin-transform-remove-strict-mode": "0.x.x",
-    "babel-preset-env": "1.x.x",
-    "bellajs": "6.x.x",
+    "babel-plugin-external-helpers": "6.x.x",
+    "babel-preset-es2015-rollup": "3.x.x",
+    "bellajs": "7.x.x",
+    "minimist": "1.x.x",
+    "rollup": "0.x.x",
+    "rollup-plugin-babel": "2.x.x",
+    "rollup-plugin-cleanup": "1.x.x",
+    "rollup-plugin-commonjs": "8.x.x",
+    "rollup-plugin-node-resolve": "3.x.x",
     "uglify-js": "3.x.x"
   },
   "devDependencies": {
@@ -45,11 +52,5 @@
     "es6",
     "util"
   ],
-  "license": "MIT",
-  "gccmin": {
-    "source": "./test/data/sample-math.js",
-    "target": "./test/data/output",
-    "filename": "sample",
-    "globalVar": "sampleMath"
-  }
+  "license": "MIT"
 }

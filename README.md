@@ -10,43 +10,15 @@ Just write scripts for Node.js environment, then build to use in the browsers.
 
 # Usage
 
-In order to use gcc-min, please follow the steps as below:
-
-#### 1, Install and save gcc-min to devDependencies
-
 ```
 npm install gcc-min --save-dev
+
+// command
+gccmin --entry entryFile --name moduleName --output outputDir --package pathToPackageJSONFile
+
+// or
+gccmin -e entryFile -n moduleName -o outputDir -p pathToPackageJSONFile
 ```
-
-#### 2, Update package.json with *gccmin* property
-
-```
-"gccmin": {
-  "source": "PATH_TO_SOURCE_FILE",
-  "target": "WHERE_TO_OUTPUT",
-  "filename": "NAME_OF_OUTPUT_FILE",
-  "globalVar": "GLOBAL_VAR_NAME"
-}
-```
-
-#### 3, Add shortcut command to the "script" section
-
-```
-"scripts": {
-  "build": "gccmin"
-},
-```
-
-So you can run the command to build:
-
-```
-npm run build
-```
-
-It will parse your package.json file, get the values in "gccmin" then build the module with these specified configurations.
-
-
-For better understanding, please refer [this live example](https://github.com/ndaidong/bellajs/blob/master/package.json).
 
 
 # Test
