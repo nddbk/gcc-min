@@ -17,11 +17,11 @@
   "scripts": {
     "lint": "eslint ./src ./tests",
     "nsp": "nsp check --output checkstyle",
+    "report": "nyc report --reporter=lcov > coverage.lcov && codecov",
     "pretest": "npm run lint && npm run nsp",
     "tape": "npm run build && nyc tape tests/start.js | tap-spec",
     "test": "npm run tape",
-    "posttest": "nyc report --reporter=lcov",
-    "coveralls": "npm test && cat ./coverage/lcov.info | coveralls",
+    "posttest": "CODECOV_TOKEN=b7ad5ba4-6a46-4d1c-848f-f9011c18e16f npm run report",
     "reset": "node bin/reset",
     "build": "node ./builder/index -e ../tests/data/main.js -n math -o ../tests/data/output -p ../tests/data/package.json"
   },
@@ -38,11 +38,11 @@
     "uglify-js": "3.x.x"
   },
   "devDependencies": {
-    "coveralls": "2.x.x",
+    "codecov": "2.x.x",
     "eslint": "3.x.x",
     "eslint-config-ggc": "1.x.x",
     "nsp": "2.x.x",
-    "nyc": "10.x.x",
+    "nyc": "11.x.x",
     "tap-spec": "4.x.x",
     "tape": "4.x.x"
   },
