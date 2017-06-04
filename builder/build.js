@@ -12,12 +12,21 @@ var pkg = argv.package || argv.p;
 
 var build = require('../src/main');
 
+let fullPath = __dirname;
+let subDir = '/node_modules/gcc-min/builder';
+if (fullPath.includes(subDir)) {
+  fullPath = fullPath.replace(subDir, '');
+}
+
 var getPackage = (file = 'package.json') => {
-  return require(join(__dirname, normalize(`${file}`)));
+  let f = join(fullPath, normalize(file));
+  return require(f);
 };
 
 let pack = getPackage(pkg);
 if (pack) {
+  entry = join(fullPath, normalize(entry));
+  output = join(fullPath, normalize(output));
   build(entry, mname, output, pack);
 }
 
