@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var fs = require('fs');
-var {join, normalize} = require('path');
+var {normalize} = require('path');
 var exec = require('child_process').execSync;
 
 var {
@@ -11,7 +11,7 @@ var {
 
 var release = (result, mname, outputDir, pack) => {
 
-  let output = join(__dirname, normalize(`${outputDir}`));
+  let output = normalize(outputDir);
 
   let releaseAt = (new Date()).toUTCString();
 
@@ -59,7 +59,7 @@ var release = (result, mname, outputDir, pack) => {
 
 
 module.exports = async (entryFile, mname, output, pack) => {
-  let entry = join(__dirname, normalize(`${entryFile}`));
+  let entry = normalize(entryFile);
   let result = await rollupify(entry, mname);
   release(result, mname, output, pack);
 };

@@ -1,5 +1,5 @@
 {
-  "version": "5.0.0",
+  "version": "5.1.0",
   "name": "gcc-min",
   "description": "Just write scripts for Node.js environment, then build to use in the browsers",
   "repository": {
@@ -8,7 +8,7 @@
   },
   "author": "@ndaidong",
   "bin": {
-    "gccmin": "./builder/build"
+    "gccmin": "builder/build.js"
   },
   "main": "./index.js",
   "engines": {
