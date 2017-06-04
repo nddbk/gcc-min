@@ -1,64 +1,26 @@
 #!/usr/bin/env node
 
-var fs = require('fs');
 var {join, normalize} = require('path');
-var exec = require('child_process').execSync;
 
-var writeFile = require('./writeFile');
-var rollupify = require('./rollupify');
+var minimist = require('minimist');
 
-var release = (result, mname, outputDir, pack) => {
+var argv = minimist(process.argv.slice(2));
+var entry = argv.entry || argv.e;
+var mname = argv.name || argv.n;
+var output = argv.output || argv.o;
+var pkg = argv.package || argv.p;
 
-  let output = join(__dirname, normalize(`${outputDir}`));
+var build = require('../src/main');
 
-  let releaseAt = (new Date()).toUTCString();
-
-  let {
-    name,
-    version,
-    author,
-    repository,
-    license
-  } = pack;
-
-  let minHeader = `// ${name}@${version}, by ${author} - built on ${releaseAt} - published under ${license} license`;
-
-  let fullHeader = [
-    `/**`,
-    ` * ${name}@${version}`,
-    ` * built on: ${releaseAt}`,
-    ` * repository: ${repository.url}`,
-    ` * maintainer: ${author}`,
-    ` * License: ${license}`,
-    `**/`
-  ].join('\n');
-
-  if (fs.existsSync(output)) {
-    exec('rm -rf ' + output);
-  }
-  exec(`mkdir ${output}`);
-
-  let {
-    code,
-    minified,
-    map: sourceMap
-  } = result;
-
-  writeFile(`${output}/${mname}.js`, [fullHeader, code].join('\n'));
-
-  if (result.minified) {
-    writeFile(`${output}/${mname}.min.js`, [minHeader, minified].join('\n'));
-  }
-
-  if (result.map) {
-    writeFile(`${output}/${mname}.min.map`, sourceMap);
-  }
+var getPackage = (file = 'package.json') => {
+  return require(join(__dirname, normalize(`${file}`)));
 };
 
+let pack = getPackage(pkg);
+if (pack) {
+  build(entry, mname, output, pack);
+}
 
-module.exports = async (entryFile, mname, output, pack) => {
-  let entry = join(__dirname, normalize(`${entryFile}`));
-  let result = await rollupify(entry, mname);
-  release(result, mname, output, pack);
+module.exports = {
+  build
 };
-

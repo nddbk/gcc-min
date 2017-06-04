@@ -1,5 +1,5 @@
 {
-  "version": "4.1.1",
+  "version": "5.0.0",
   "name": "gcc-min",
   "description": "Just write scripts for Node.js environment, then build to use in the browsers",
   "repository": {
@@ -8,7 +8,7 @@
   },
   "author": "@ndaidong",
   "bin": {
-    "gccmin": "./builder/index.js"
+    "gccmin": "./builder/build"
   },
   "main": "./index.js",
   "engines": {
@@ -22,8 +22,8 @@
     "tape": "npm run build && nyc tape tests/start.js | tap-spec",
     "test": "npm run tape",
     "posttest": "CODECOV_TOKEN=b7ad5ba4-6a46-4d1c-848f-f9011c18e16f npm run report",
-    "reset": "node bin/reset",
-    "build": "node ./builder/index -e ../tests/data/main.js -n realdom -o ../tests/data/output -p ../tests/data/package.json"
+    "reset": "node builder/reset",
+    "build": "node builder/build -e ../tests/data/main.js -n math -o ../tests/data/output -p ../tests/data/package.json"
   },
   "dependencies": {
     "babel-plugin-external-helpers": "6.x.x",

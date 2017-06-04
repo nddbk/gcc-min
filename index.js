@@ -3,13 +3,7 @@
  * @ndaidong
 **/
 
-var {version} = require('./package');
-
-var build = require('./builder/build');
-
-var main = {
-  build,
-  version
-};
+var main = require('./src/main');
+main.version = require('./package').version;
 
 module.exports = main;
