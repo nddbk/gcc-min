@@ -37,7 +37,8 @@ var rollupify = (entry, name) => {
           'es2015-rollup'
         ],
         plugins: [
-          'external-helpers'
+          'external-helpers',
+          'transform-remove-strict-mode'
         ]
       }),
       cleanup()
