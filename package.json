@@ -1,5 +1,5 @@
 {
-  "version": "5.1.1",
+  "version": "5.1.2",
   "name": "gcc-min",
   "description": "Just write scripts for Node.js environment, then build to use in the browsers",
   "repository": {
@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "babel-plugin-external-helpers": "6.x.x",
-    "babel-plugin-transform-remove-strict-mode": "0.0.2",
+    "babel-plugin-transform-remove-strict-mode": "0.x.x",
     "babel-preset-es2015-rollup": "3.x.x",
     "bellajs": "7.x.x",
     "minimist": "1.x.x",
