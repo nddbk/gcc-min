@@ -30,7 +30,7 @@ Or Node APIs
 ```
 var gccmin = require('gcc-min');
 
-gccmin.build(path entryFile, String moduleName, path outputDir, Object config);
+gccmin(path entryFile, String moduleName, path outputDir, Object config);
 
 ```
 
