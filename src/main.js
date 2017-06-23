@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+/* eslint max-params: 0 */
+
 var fs = require('fs');
 var {normalize} = require('path');
 var exec = require('child_process').execSync;
@@ -9,7 +11,7 @@ var {
   rollupify
 } = require('../builder');
 
-var release = (result, mname, outputDir, pack) => {
+var release = (result, mname, fileName = '', outputDir = './', pack = {}) => {
 
   let output = normalize(outputDir);
 
@@ -46,21 +48,23 @@ var release = (result, mname, outputDir, pack) => {
     map: sourceMap
   } = result;
 
-  writeFile(`${output}/${mname}.js`, [fullHeader, code].join('\n'));
+  let fname = fileName || mname;
+
+  writeFile(`${output}/${fname}.js`, [fullHeader, code].join('\n'));
 
   if (result.minified) {
-    writeFile(`${output}/${mname}.min.js`, [minHeader, minified].join('\n'));
+    writeFile(`${output}/${fname}.min.js`, [minHeader, minified].join('\n'));
   }
 
   if (result.map) {
-    writeFile(`${output}/${mname}.min.map`, sourceMap);
+    writeFile(`${output}/${fname}.min.map`, sourceMap);
   }
 };
 
 
-module.exports = async (entryFile, mname, output, pack) => {
+module.exports = async (entryFile, mname, fname, output, pack) => {
   let entry = normalize(entryFile);
   let result = await rollupify(entry, mname);
-  release(result, mname, output, pack);
+  release(result, mname, fname, output, pack);
 };
 

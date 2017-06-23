@@ -19,7 +19,7 @@ npm install gcc-min
 Run command to build:
 
 ```
-gccmin --entry entryFile --name moduleName --output outputDir --package pathToPackageJSONFile
+gccmin --entry entryFile --name moduleName --file fileName --output outputDir --package pathToPackageJSONFile
 
 // or
 gccmin -e entryFile -n moduleName -o outputDir -p pathToPackageJSONFile
@@ -30,11 +30,18 @@ Or Node APIs
 ```
 var gccmin = require('gcc-min');
 
-gccmin(path entryFile, String moduleName, path outputDir, Object config);
+gccmin(path entryFile, String moduleName, String fileName, path outputDir, Object config);
 
 ```
 
-`config` is a JavaScript object which contain the meta data info to insert into the output files. It may be extracted from package.json file.
+In which:
+
+
+- `entryFile`: path to entry file that will be processed by Rollup
+- `moduleName`: name of module, to be accessible from global scope
+- `fileName`: name of file will be generated, if not specify, it's the same as moduleName
+- `outputDir`: location to save generated files to
+- `config`: a JavaScript object which contain the meta data info to insert into the output files. It may be extracted from package.json file.
 
 
 The config object must provide the following properties:
