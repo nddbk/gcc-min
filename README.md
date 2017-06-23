@@ -22,7 +22,7 @@ Run command to build:
 gccmin --entry entryFile --name moduleName --file fileName --output outputDir --package pathToPackageJSONFile
 
 // or
-gccmin -e entryFile -n moduleName -o outputDir -p pathToPackageJSONFile
+gccmin -e entryFile -n moduleName -f fileName -o outputDir -p pathToPackageJSONFile
 ```
 
 Or Node APIs
