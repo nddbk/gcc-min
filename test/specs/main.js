@@ -11,9 +11,9 @@ var {
 } = require('bellajs');
 
 var pkgFake = require('../data/package.json');
-var proFile = './tests/data/output/math.js';
-var devFile = './tests/data/output/math.min.js';
-var mapFile = './tests/data/output/math.min.map';
+var proFile = './test/data/output/math.js';
+var devFile = './test/data/output/math.min.js';
+var mapFile = './test/data/output/math.min.map';
 
 var proMath = require('../data/output/math');
 var devMath = require('../data/output/math.min');

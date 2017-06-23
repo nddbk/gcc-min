@@ -1,5 +1,7 @@
 // rollupify
 
+/* eslint no-console: 0 */
+
 var rollup = require('rollup');
 
 var babel = require('rollup-plugin-babel');
