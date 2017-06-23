@@ -7,6 +7,7 @@ var minimist = require('minimist');
 var argv = minimist(process.argv.slice(2));
 var entry = argv.entry || argv.e;
 var mname = argv.name || argv.n;
+var fname = argv.file || argv.f;
 var output = argv.output || argv.o;
 var pkg = argv.package || argv.p;
 
@@ -27,7 +28,7 @@ let pack = getPackage(pkg);
 if (pack) {
   entry = join(fullPath, normalize(entry));
   output = join(fullPath, normalize(output));
-  build(entry, mname, output, pack);
+  build(entry, mname, fname, output, pack);
 }
 
 module.exports = {
