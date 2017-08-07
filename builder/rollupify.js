@@ -45,12 +45,11 @@ var rollupify = (entry, name) => {
       }),
       cleanup()
     ]
-  }).then((bundle) => {
+  }).then(async (bundle) => {
     console.log('Generating code with bundle...');
-    let result = bundle.generate({
+    let result = await bundle.generate({
       format: 'umd',
       indent: true,
-      moduleId: name,
       moduleName: name
     });
     console.log('Rolling finished.');
