@@ -1,6 +1,6 @@
 /**
  * math@1.0.0
- * built on: Fri, 23 Jun 2017 08:09:21 GMT
+ * built on: Mon, 07 Aug 2017 04:50:45 GMT
  * repository: https://somewhere.com/math
  * maintainer: @ndaidong
  * License: MIT
@@ -8,7 +8,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (factory((global.xMath = global.xMath || {})));
+  (factory((global.xMath = {})));
 }(this, (function (exports) { 'use strict';
   var add = function add(a, b) {
     return a + b;
