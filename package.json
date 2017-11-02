@@ -1,5 +1,5 @@
 {
-  "version": "6.0.1",
+  "version": "6.0.2",
   "name": "gcc-min",
   "description": "Just write scripts for Node.js environment, then build to use in the browsers",
   "repository": {
@@ -20,26 +20,29 @@
     "report": "nyc report --reporter=lcov > coverage.lcov && codecov",
     "pretest": "npm run lint && npm run nsp && npm run build",
     "tape": "nyc tape test/start.js | tap-spec",
-    "test": "npm run tape",
+    "test": "DEBUG=gccmin:* npm run tape",
     "posttest": "CODECOV_TOKEN=b7ad5ba4-6a46-4d1c-848f-f9011c18e16f npm run report",
     "build": "node builder/build -e ../test/data/main.js -n xMath -f math -o ../test/data/output -p ../test/data/package.json",
     "reset": "node reset"
   },
   "dependencies": {
+    "ajv": "5.x.x",
+    "babel-core": "6.x.x",
     "babel-plugin-external-helpers": "6.x.x",
     "babel-plugin-transform-remove-strict-mode": "0.x.x",
     "babel-preset-es2015-rollup": "3.x.x",
     "bellajs": "7.x.x",
+    "debug": "3.x.x",
     "minimist": "1.x.x",
     "rollup": "0.x.x",
-    "rollup-plugin-babel": "2.x.x",
-    "rollup-plugin-cleanup": "1.x.x",
+    "rollup-plugin-babel": "3.x.x",
+    "rollup-plugin-cleanup": "2.x.x",
     "rollup-plugin-commonjs": "8.x.x",
     "rollup-plugin-node-resolve": "3.x.x",
-    "uglify-js": "3.x.x"
+    "uglify-es": "3.x.x"
   },
   "devDependencies": {
-    "codecov": "2.x.x",
+    "codecov": "3.x.x",
     "eslint": "4.x.x",
     "eslint-config-ggc": "1.x.x",
     "nsp": "2.x.x",
