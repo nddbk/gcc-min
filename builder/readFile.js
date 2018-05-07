@@ -1,9 +1,12 @@
 // builder/readFile
 
-var fs = require('fs');
+const {
+  existsSync,
+  readFileSync,
+} = require('fs');
 
-var readFile = (f) => {
-  return fs.existsSync(f) ? fs.readFileSync(f, 'utf8') : '';
+const readFile = (f) => {
+  return existsSync(f) ? readFileSync(f, 'utf8') : '';
 };
 
 module.exports = readFile;

@@ -1,11 +1,11 @@
-var build = require('./build');
-var readFile = require('./readFile');
-var writeFile = require('./writeFile');
-var rollupify = require('./rollupify');
+const build = require('./build');
+const readFile = require('./readFile');
+const writeFile = require('./writeFile');
+const rollupify = require('./rollupify');
 
 module.exports = {
   build,
   rollupify,
   readFile,
-  writeFile
+  writeFile,
 };
