@@ -1,9 +1,11 @@
 // builder/writeFile
 
-var fs = require('fs');
+const {
+  writeFileSync,
+} = require('fs');
 
-var writeFile = (f, content) => {
-  return fs.writeFileSync(f, content, 'utf8');
+const writeFile = (f, content) => {
+  return writeFileSync(f, content, 'utf8');
 };
 
 module.exports = writeFile;

@@ -3,20 +3,20 @@
  * @ndaidong
  */
 
-var fs = require('fs');
-var test = require('tape');
+const fs = require('fs');
+const test = require('tape');
 
-var {
-  isFunction
+const {
+  isFunction,
 } = require('bellajs');
 
-var pkgFake = require('../data/package.json');
-var proFile = './test/data/output/math.js';
-var devFile = './test/data/output/math.min.js';
-var mapFile = './test/data/output/math.min.map';
+const pkgFake = require('../data/package.json');
+const proFile = './test/data/output/math.js';
+const devFile = './test/data/output/math.min.js';
+const mapFile = './test/data/output/math.min.map';
 
-var proMath = require('../data/output/math');
-var devMath = require('../data/output/math.min');
+const proMath = require('../data/output/math');
+const devMath = require('../data/output/math.min');
 
 
 test('Validate production output', (assert) => {
@@ -54,7 +54,7 @@ test('Validate development output', (assert) => {
 });
 
 
-var checkOutput = (math) => {
+const checkOutput = (math) => {
   test('Validate built module', (assert) => {
     assert.ok(isFunction(math.add), 'Module must have method "add"');
     assert.ok(isFunction(math.sub), 'Module must have method "sub"');
@@ -63,3 +63,4 @@ var checkOutput = (math) => {
 };
 
 [proMath, devMath].map(checkOutput);
+

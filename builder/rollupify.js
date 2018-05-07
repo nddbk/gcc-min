@@ -4,16 +4,16 @@ const debug = require('debug');
 const info = debug('gccmin:info');
 const error = debug('gccmin:error');
 
-var rollup = require('rollup');
+const {rollup} = require('rollup');
 
-var babel = require('rollup-plugin-babel');
-var nodeResolve = require('rollup-plugin-node-resolve');
-var commonjs = require('rollup-plugin-commonjs');
-var cleanup = require('rollup-plugin-cleanup');
+const babel = require('rollup-plugin-babel');
+const nodeResolve = require('rollup-plugin-node-resolve');
+const commonjs = require('rollup-plugin-commonjs');
+const cleanup = require('rollup-plugin-cleanup');
 
-var {minify} = require('uglify-es');
+const {minify} = require('uglify-es');
 
-var jsminify = (source = '') => {
+const jsminify = (source = '') => {
   info('Minifying...');
   return minify(source, {sourceMap: true});
 };
@@ -22,46 +22,46 @@ let removeBr = (s) => {
   return s.replace(/(\r\n+|\n+|\r+)/gm, '\n');
 };
 
-var rollupify = async (input, name = '') => {
+const rollupify = async (input, name = '') => {
   info('Rollup start...');
   try {
-    let bundle = await rollup.rollup({
+    let bundle = await rollup({
       input,
       plugins: [
         nodeResolve({
           module: true,
           jsnext: true,
           extensions: [
-            '.js'
-          ]
+            '.js',
+          ],
         }),
         commonjs(),
         babel({
           babelrc: false,
           presets: [
-            'es2015-rollup'
+            'es2015-rollup',
           ],
           plugins: [
             'external-helpers',
-            'transform-remove-strict-mode'
-          ]
+            'transform-remove-strict-mode',
+          ],
         }),
-        cleanup()
-      ]
+        cleanup(),
+      ],
     });
 
     info('Generating code with bundle...');
     let result = await bundle.generate({
       format: 'umd',
       indent: true,
-      name
+      name,
     });
     info('Rolling finished.');
 
     let {code} = result;
 
     let output = {
-      code: removeBr(code)
+      code: removeBr(code),
     };
 
     let min = jsminify(code);

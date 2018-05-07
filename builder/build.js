@@ -1,17 +1,17 @@
 #!/usr/bin/env node
 
-var {join, normalize} = require('path');
+const {join, normalize} = require('path');
 
-var minimist = require('minimist');
+const minimist = require('minimist');
 
-var argv = minimist(process.argv.slice(2));
-var entry = argv.entry || argv.e;
-var mname = argv.name || argv.n;
-var fname = argv.file || argv.f;
-var output = argv.output || argv.o;
-var pkg = argv.package || argv.p;
+const argv = minimist(process.argv.slice(2));
+let entry = argv.entry || argv.e;
+let mname = argv.name || argv.n;
+let fname = argv.file || argv.f;
+let output = argv.output || argv.o;
+let pkg = argv.package || argv.p;
 
-var build = require('../src/main');
+const build = require('../src/main');
 
 let fullPath = __dirname;
 let subDir = '/node_modules/gcc-min/builder';
@@ -19,7 +19,7 @@ if (fullPath.includes(subDir)) {
   fullPath = fullPath.replace(subDir, '');
 }
 
-var getPackage = (file = 'package.json') => {
+const getPackage = (file = 'package.json') => {
   let f = join(fullPath, normalize(file));
   return require(f);
 };
@@ -32,5 +32,5 @@ if (pack) {
 }
 
 module.exports = {
-  build
+  build,
 };

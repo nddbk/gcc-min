@@ -2,17 +2,16 @@
 
 /* eslint max-params: 0 */
 
-var fs = require('fs');
-var {normalize} = require('path');
-var exec = require('child_process').execSync;
+const {existsSync} = require('fs');
+const {normalize} = require('path');
+const {execSync} = require('child_process');
 
-var {
+const {
   writeFile,
-  rollupify
+  rollupify,
 } = require('../builder');
 
-var release = (result, mname, fileName = '', outputDir = './', pack = {}) => {
-
+const release = (result, mname, fileName = '', outputDir = './', pack = {}) => {
   let output = normalize(outputDir);
 
   let releaseAt = (new Date()).toUTCString();
@@ -22,7 +21,7 @@ var release = (result, mname, fileName = '', outputDir = './', pack = {}) => {
     version,
     author,
     repository,
-    license
+    license,
   } = pack;
 
   let minHeader = `// ${name}@${version}, by ${author} - built on ${releaseAt} - published under ${license} license`;
@@ -34,18 +33,18 @@ var release = (result, mname, fileName = '', outputDir = './', pack = {}) => {
     ` * repository: ${repository.url}`,
     ` * maintainer: ${author}`,
     ` * License: ${license}`,
-    `**/`
+    `**/`,
   ].join('\n');
 
-  if (fs.existsSync(output)) {
-    exec('rm -rf ' + output);
+  if (existsSync(output)) {
+    execSync('rm -rf ' + output);
   }
-  exec(`mkdir ${output}`);
+  execSync(`mkdir ${output}`);
 
   let {
     code,
     minified,
-    map: sourceMap
+    map: sourceMap,
   } = result;
 
   let fname = fileName || mname;
