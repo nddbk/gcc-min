@@ -1,6 +1,6 @@
 /**
  * math@1.0.0
- * built on: Mon, 07 May 2018 08:26:09 GMT
+ * built on: Thu, 17 May 2018 09:01:58 GMT
  * repository: https://somewhere.com/math
  * maintainer: @ndaidong
  * License: MIT
@@ -10,12 +10,43 @@
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
   (factory((global.xMath = {})));
 }(this, (function (exports) { 'use strict';
-  var add = function add(a, b) {
+  let add = (a, b) => {
     return a + b;
   };
-  var sub = function sub(a, b) {
+  let sub = (a, b) => {
     return a - b;
   };
+  const compose = (...fns) => {
+    return fns.reduce((f, g) => (x) => f(g(x)));
+  };
+  const pipe = (...fns) => {
+    return fns.reduceRight((f, g) => (x) => f(g(x)));
+  };
+  const curry = (fn) => {
+    let totalArguments = fn.length;
+    let next = (argumentLength, rest) => {
+      if (argumentLength > 0) {
+        return (...args) => {
+          return next(
+            argumentLength - args.length,
+            [
+              ...rest,
+              ...args,
+            ]
+          );
+        };
+      }
+      return fn(...rest);
+    };
+    return next(totalArguments, []);
+  };
+  const tMap = new Map();
+  const tSet = new Set();
+  exports.compose = compose;
+  exports.pipe = pipe;
+  exports.curry = curry;
+  exports.tMap = tMap;
+  exports.tSet = tSet;
   exports.add = add;
   exports.sub = sub;
   Object.defineProperty(exports, '__esModule', { value: true });

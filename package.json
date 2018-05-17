@@ -1,5 +1,5 @@
 {
-  "version": "6.0.3",
+  "version": "6.1.0",
   "name": "gcc-min",
   "description": "Just write scripts for Node.js environment, then build to use in the browsers",
   "repository": {
@@ -22,20 +22,15 @@
     "tape": "nyc tape test/start.js | tap-spec",
     "test": "DEBUG=gccmin:* npm run tape",
     "posttest": "CODECOV_TOKEN=b7ad5ba4-6a46-4d1c-848f-f9011c18e16f npm run report",
-    "build": "node builder/build -e ../test/data/main.js -n xMath -f math -o ../test/data/output -p ../test/data/package.json",
+    "build": "DEBUG=gccmin:* node builder/build -e ../test/data/main.js -n xMath -f math -o ../test/data/output -p ../test/data/package.json",
     "reset": "node reset"
   },
   "dependencies": {
-    "ajv": "^6.4.0",
-    "babel-core": "^6.26.3",
-    "babel-plugin-external-helpers": "^6.22.0",
-    "babel-plugin-transform-remove-strict-mode": "0.0.2",
-    "babel-preset-es2015-rollup": "^3.0.0",
-    "bellajs": "^7.2.0",
+    "bellajs": "^7.2.2",
     "debug": "^3.1.0",
     "minimist": "^1.2.0",
-    "rollup": "^0.58.2",
-    "rollup-plugin-babel": "^3.0.4",
+    "rollup": "^0.59.1",
+    "rollup-plugin-buble": "^0.19.2",
     "rollup-plugin-cleanup": "^3.0.0-beta.1",
     "rollup-plugin-commonjs": "^9.1.3",
     "rollup-plugin-node-resolve": "^3.3.0",
