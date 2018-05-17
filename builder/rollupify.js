@@ -6,7 +6,7 @@ const error = debug('gccmin:error');
 
 const {rollup} = require('rollup');
 
-const babel = require('rollup-plugin-babel');
+const buble = require('rollup-plugin-buble');
 const nodeResolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
 const cleanup = require('rollup-plugin-cleanup');
@@ -36,15 +36,17 @@ const rollupify = async (input, name = '') => {
           ],
         }),
         commonjs(),
-        babel({
-          babelrc: false,
-          presets: [
-            'es2015-rollup',
-          ],
-          plugins: [
-            'external-helpers',
-            'transform-remove-strict-mode',
-          ],
+        buble({
+          transforms: {
+            arrow: false,
+            classes: false,
+            defaultParameter: false,
+            destructuring: false,
+            letConst: false,
+            parameterDestructuring: false,
+            spreadRest: false,
+            templateString: false,
+          },
         }),
         cleanup(),
       ],
