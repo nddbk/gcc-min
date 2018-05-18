@@ -1,0 +1,32 @@
+export * from './add';
+export * from './sub';
+
+export const compose = (...fns) => {
+  return fns.reduce((f, g) => (x) => f(g(x)));
+};
+
+export const pipe = (...fns) => {
+  return fns.reduceRight((f, g) => (x) => f(g(x)));
+};
+
+export const curry = (fn) => {
+  let totalArguments = fn.length;
+  let next = (argumentLength, rest) => {
+    if (argumentLength > 0) {
+      return (...args) => {
+        return next(
+          argumentLength - args.length,
+          [
+            ...rest,
+            ...args,
+          ]
+        );
+      };
+    }
+    return fn(...rest);
+  };
+  return next(totalArguments, []);
+};
+
+export const tMap = new Map();
+export const tSet = new Set();
