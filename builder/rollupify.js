@@ -6,7 +6,6 @@ const error = debug('gccmin:error');
 
 const {rollup} = require('rollup');
 
-const buble = require('rollup-plugin-buble');
 const nodeResolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
 const cleanup = require('rollup-plugin-cleanup');
@@ -36,18 +35,6 @@ const rollupify = async (input, name = '') => {
           ],
         }),
         commonjs(),
-        buble({
-          transforms: {
-            arrow: false,
-            classes: false,
-            defaultParameter: false,
-            destructuring: false,
-            letConst: false,
-            parameterDestructuring: false,
-            spreadRest: false,
-            templateString: false,
-          },
-        }),
         cleanup(),
       ],
     });
