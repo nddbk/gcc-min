@@ -1,5 +1,5 @@
 {
-  "version": "7.0.0",
+  "version": "7.0.1",
   "name": "gcc-min",
   "description": "Just write scripts for Node.js environment, then build to use in the browsers",
   "repository": {
@@ -16,12 +16,8 @@
   },
   "scripts": {
     "lint": "eslint ./src ./test",
-    "nsp": "nsp check --output checkstyle",
-    "report": "nyc report --reporter=lcov > coverage.lcov && codecov",
-    "pretest": "npm run lint && npm run nsp && npm run build",
-    "tape": "nyc tape test/start.js | tap-spec",
-    "test": "DEBUG=gccmin:* npm run tape",
-    "posttest": "CODECOV_TOKEN=b7ad5ba4-6a46-4d1c-848f-f9011c18e16f npm run report",
+    "pretest": "npm run lint && npm run build",
+    "test": "DEBUG=gccmin:* tap test/start.js --coverage --reporter=spec",
     "build": "DEBUG=gccmin:* node builder/build -e ../test/data/main.js -n xMath -f math -o ../test/data/output -p ../test/data/package.json",
     "reset": "node reset"
   },
@@ -36,13 +32,9 @@
     "uglify-es": "^3.3.9"
   },
   "devDependencies": {
-    "codecov": "^3.0.1",
     "eslint": "^4.19.1",
     "eslint-config-goes": "^1.0.0",
-    "nsp": "^3.2.1",
-    "nyc": "^11.7.1",
-    "tap-spec": "^4.1.1",
-    "tape": "^4.9.0"
+    "tap": "^12.0.1"
   },
   "keywords": [
     "compile",

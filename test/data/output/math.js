@@ -1,6 +1,6 @@
 /**
  * math@1.0.0
- * built on: Fri, 18 May 2018 01:10:35 GMT
+ * built on: Thu, 24 May 2018 13:48:27 GMT
  * repository: https://somewhere.com/math
  * maintainer: @ndaidong
  * License: MIT

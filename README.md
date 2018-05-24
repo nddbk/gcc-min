@@ -4,8 +4,7 @@ Just write scripts for Node.js environment, then build to use in the browsers.
 [![NPM](https://badge.fury.io/js/gcc-min.svg)](https://badge.fury.io/js/gcc-min)
 [![Build Status](https://travis-ci.org/ndaidong/gcc-min.svg?branch=master)](https://travis-ci.org/ndaidong/gcc-min)
 [![codecov](https://codecov.io/gh/ndaidong/gcc-min/branch/master/graph/badge.svg)](https://codecov.io/gh/ndaidong/gcc-min)
-![Dependency Status](https://david-dm.org/ndaidong/gcc-min.svg)
-[![NSP Status](https://nodesecurity.io/orgs/techpush/projects/1423652f-9450-40d0-9df6-1d54b2312441/badge)](https://nodesecurity.io/orgs/techpush/projects/1423652f-9450-40d0-9df6-1d54b2312441)
+![License](https://img.shields.io/npm/l/bellajs.svg)
 
 
 ## Usage
@@ -28,7 +27,7 @@ gccmin -e entryFile -n moduleName -f fileName -o outputDir -p pathToPackageJSONF
 Or Node APIs
 
 ```
-var gccmin = require('gcc-min');
+const gccmin = require('gcc-min');
 
 gccmin(path entryFile, String moduleName, String fileName, path outputDir, Object config);
 
