@@ -1,6 +1,6 @@
 /**
  * math@1.0.0
- * built on: Thu, 24 May 2018 13:48:27 GMT
+ * built on: Tue, 06 Aug 2019 14:03:03 GMT
  * repository: https://somewhere.com/math
  * maintainer: @ndaidong
  * License: MIT
@@ -10,10 +10,10 @@
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
   (factory((global.xMath = {})));
 }(this, (function (exports) { 'use strict';
-  let add = (a, b) => {
+  const add = (a, b) => {
     return a + b;
   };
-  let sub = (a, b) => {
+  const sub = (a, b) => {
     return a - b;
   };
   const compose = (...fns) => {
@@ -23,8 +23,8 @@
     return fns.reduceRight((f, g) => (x) => f(g(x)));
   };
   const curry = (fn) => {
-    let totalArguments = fn.length;
-    let next = (argumentLength, rest) => {
+    const totalArguments = fn.length;
+    const next = (argumentLength, rest) => {
       if (argumentLength > 0) {
         return (...args) => {
           return next(

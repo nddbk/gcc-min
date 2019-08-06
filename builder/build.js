@@ -6,25 +6,25 @@ const minimist = require('minimist');
 
 const argv = minimist(process.argv.slice(2));
 let entry = argv.entry || argv.e;
-let mname = argv.name || argv.n;
-let fname = argv.file || argv.f;
+const mname = argv.name || argv.n;
+const fname = argv.file || argv.f;
 let output = argv.output || argv.o;
-let pkg = argv.package || argv.p;
+const pkg = argv.package || argv.p;
 
 const build = require('../src/main');
 
 let fullPath = __dirname;
-let subDir = '/node_modules/gcc-min/builder';
+const subDir = '/node_modules/gcc-min/builder';
 if (fullPath.includes(subDir)) {
   fullPath = fullPath.replace(subDir, '');
 }
 
 const getPackage = (file = 'package.json') => {
-  let f = join(fullPath, normalize(file));
+  const f = join(fullPath, normalize(file));
   return require(f);
 };
 
-let pack = getPackage(pkg);
+const pack = getPackage(pkg);
 if (pack) {
   entry = join(fullPath, normalize(entry));
   output = join(fullPath, normalize(output));

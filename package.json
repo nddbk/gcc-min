@@ -1,5 +1,5 @@
 {
-  "version": "7.0.1",
+  "version": "7.0.2",
   "name": "gcc-min",
   "description": "Just write scripts for Node.js environment, then build to use in the browsers",
   "repository": {
@@ -12,7 +12,7 @@
   },
   "main": "./index.js",
   "engines": {
-    "node": ">= 7.6"
+    "node": ">= 8.6"
   },
   "scripts": {
     "lint": "eslint ./src ./test",
@@ -22,19 +22,18 @@
     "reset": "node reset"
   },
   "dependencies": {
-    "bellajs": "^7.2.2",
-    "debug": "^3.1.0",
+    "bellajs": "^7.5.0",
+    "debug": "^3.2.6",
     "minimist": "^1.2.0",
-    "rollup": "^0.59.1",
-    "rollup-plugin-cleanup": "^3.0.0-beta.1",
-    "rollup-plugin-commonjs": "^9.1.3",
-    "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup": "^0.59.4",
+    "rollup-plugin-cleanup": "^3.1.1",
+    "rollup-plugin-commonjs": "^9.3.4",
+    "rollup-plugin-node-resolve": "^3.4.0",
     "uglify-es": "^3.3.9"
   },
   "devDependencies": {
-    "eslint": "^4.19.1",
-    "eslint-config-goes": "^1.0.0",
-    "tap": "^12.0.1"
+    "eslint-config-goes": "^1.1.6",
+    "tap": "^12.7.0"
   },
   "keywords": [
     "compile",

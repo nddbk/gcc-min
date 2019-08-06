@@ -12,11 +12,11 @@ const {
 } = require('../builder');
 
 const release = (result, mname, fileName = '', outputDir = './', pack = {}) => {
-  let output = normalize(outputDir);
+  const output = normalize(outputDir);
 
-  let releaseAt = (new Date()).toUTCString();
+  const releaseAt = (new Date()).toUTCString();
 
-  let {
+  const {
     name,
     version,
     author,
@@ -24,9 +24,9 @@ const release = (result, mname, fileName = '', outputDir = './', pack = {}) => {
     license,
   } = pack;
 
-  let minHeader = `// ${name}@${version}, by ${author} - built on ${releaseAt} - published under ${license} license`;
+  const minHeader = `// ${name}@${version}, by ${author} - built on ${releaseAt} - published under ${license} license`;
 
-  let fullHeader = [
+  const fullHeader = [
     `/**`,
     ` * ${name}@${version}`,
     ` * built on: ${releaseAt}`,
@@ -41,13 +41,13 @@ const release = (result, mname, fileName = '', outputDir = './', pack = {}) => {
   }
   execSync(`mkdir ${output}`);
 
-  let {
+  const {
     code,
     minified,
     map: sourceMap,
   } = result;
 
-  let fname = fileName || mname;
+  const fname = fileName || mname;
 
   writeFile(`${output}/${fname}.js`, [fullHeader, code].join('\n'));
 
@@ -62,8 +62,8 @@ const release = (result, mname, fileName = '', outputDir = './', pack = {}) => {
 
 
 module.exports = async (entryFile, mname, fname, output, pack) => {
-  let entry = normalize(entryFile);
-  let result = await rollupify(entry, mname);
+  const entry = normalize(entryFile);
+  const result = await rollupify(entry, mname);
   release(result, mname, fname, output, pack);
 };
 
