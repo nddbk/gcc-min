@@ -23,8 +23,8 @@ test('Validate production output', (t) => {
   t.ok(fs.existsSync(proFile), 'Production file must be generated');
   t.ok(fs.existsSync(mapFile), 'Map file must be generated');
 
-  let s = fs.readFileSync(proFile, 'utf8');
-  let a = s.split('\n');
+  const s = fs.readFileSync(proFile, 'utf8');
+  const a = s.split('\n');
   t.ok(s.length > 0 && a.length > 5, 'Production file must be not empty');
 
   t.ok(a[1] === ` * ${pkgFake.name}@${pkgFake.version}`, 'Package name must be correct');
@@ -39,15 +39,15 @@ test('Validate production output', (t) => {
 test('Validate development output', (t) => {
   t.ok(fs.existsSync(devFile), 'Development file must be generated');
 
-  let s = fs.readFileSync(devFile, 'utf8');
-  let a = s.split('\n');
+  const s = fs.readFileSync(devFile, 'utf8');
+  const a = s.split('\n');
   t.ok(s.length > 0 && a.length > 1, 'Development file must be not empty');
-  let cmt = a[0];
-  let pack = `${pkgFake.name}@${pkgFake.version}`;
+  const cmt = a[0];
+  const pack = `${pkgFake.name}@${pkgFake.version}`;
   t.ok(cmt.includes(pack), 'Package must be presented with name and version');
-  let author = `${pkgFake.author}`;
+  const author = `${pkgFake.author}`;
   t.ok(cmt.includes(author), 'Package author must be correct');
-  let license = `${pkgFake.license}`;
+  const license = `${pkgFake.license}`;
   t.ok(cmt.includes(license), 'Package license must be correct');
 
   t.end();

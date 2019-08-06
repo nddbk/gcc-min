@@ -1,5 +1,6 @@
 # gcc-min
-Just write scripts for Node.js environment, then build to use in the browsers.
+Simplify package building process with Rollup.
+Just write the mudules using ES6 Modules syntax, and let's gcc-min build them to a single file.
 
 [![NPM](https://badge.fury.io/js/gcc-min.svg)](https://badge.fury.io/js/gcc-min)
 [![Build Status](https://travis-ci.org/ndaidong/gcc-min.svg?branch=master)](https://travis-ci.org/ndaidong/gcc-min)
@@ -9,13 +10,13 @@ Just write scripts for Node.js environment, then build to use in the browsers.
 
 Install:
 
-```
+```bash
 npm install gcc-min
 ```
 
 Run command to build:
 
-```
+```bash
 gccmin --entry entryFile --name moduleName --file fileName --output outputDir --package pathToPackageJSONFile
 
 // or
@@ -24,7 +25,7 @@ gccmin -e entryFile -n moduleName -f fileName -o outputDir -p pathToPackageJSONF
 
 Or Node APIs
 
-```
+```js
 const gccmin = require('gcc-min');
 
 gccmin(path entryFile, String moduleName, String fileName, path outputDir, Object config);
@@ -43,7 +44,7 @@ In which:
 
 The config object must provide the following properties:
 
-```
+```json
 {
   name: String,
   version: String in semver format, e.g: '1.2.3'
@@ -60,7 +61,7 @@ The config object must provide the following properties:
 
 ## Test
 
-```
+```bash
 git clone https://github.com/ndaidong/gcc-min.git
 cd gcc-min
 npm install

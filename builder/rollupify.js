@@ -17,14 +17,14 @@ const jsminify = (source = '') => {
   return minify(source, {sourceMap: true});
 };
 
-let removeBr = (s) => {
+const removeBr = (s) => {
   return s.replace(/(\r\n+|\n+|\r+)/gm, '\n');
 };
 
 const rollupify = async (input, name = '') => {
   info('Rollup start...');
   try {
-    let bundle = await rollup({
+    const bundle = await rollup({
       input,
       plugins: [
         nodeResolve({
@@ -40,20 +40,20 @@ const rollupify = async (input, name = '') => {
     });
 
     info('Generating code with bundle...');
-    let result = await bundle.generate({
+    const result = await bundle.generate({
       format: 'umd',
       indent: true,
       name,
     });
     info('Rolling finished.');
 
-    let {code} = result;
+    const {code} = result;
 
-    let output = {
+    const output = {
       code: removeBr(code),
     };
 
-    let min = jsminify(code);
+    const min = jsminify(code);
     if (!min.error) {
       output.minified = min.code;
       output.map = min.map;
@@ -67,6 +67,6 @@ const rollupify = async (input, name = '') => {
 };
 
 module.exports = async (entry, name) => {
-  let output = await rollupify(entry, name);
+  const output = await rollupify(entry, name);
   return output;
 };

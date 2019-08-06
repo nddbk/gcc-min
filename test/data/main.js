@@ -10,8 +10,8 @@ export const pipe = (...fns) => {
 };
 
 export const curry = (fn) => {
-  let totalArguments = fn.length;
-  let next = (argumentLength, rest) => {
+  const totalArguments = fn.length;
+  const next = (argumentLength, rest) => {
     if (argumentLength > 0) {
       return (...args) => {
         return next(
