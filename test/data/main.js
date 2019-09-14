@@ -1,6 +1,8 @@
 export * from './add';
 export * from './sub';
 
+import pkg from './package.json';
+
 export const compose = (...fns) => {
   return fns.reduce((f, g) => (x) => f(g(x)));
 };
@@ -30,3 +32,7 @@ export const curry = (fn) => {
 
 export const tMap = new Map();
 export const tSet = new Set();
+
+export const getPackage = () => {
+  return pkg;
+};
