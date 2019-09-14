@@ -5,6 +5,7 @@ const info = debug('gccmin:info');
 const error = debug('gccmin:error');
 
 const {rollup} = require('rollup');
+const builtins = require('rollup-plugin-node-builtins');
 const nodeResolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
 const rjson = require('rollup-plugin-json');
@@ -23,6 +24,7 @@ const rollupify = async (input, name = '') => {
     const bundle = await rollup({
       input,
       plugins: [
+        builtins(),
         nodeResolve(),
         commonjs({
           include: 'node_modules/**',
