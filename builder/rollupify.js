@@ -7,6 +7,7 @@ const error = debug('gccmin:error');
 const {rollup} = require('rollup');
 const nodeResolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
+const rjson = require('rollup-plugin-json');
 const cleanup = require('rollup-plugin-cleanup');
 const terser = require('terser');
 
@@ -26,6 +27,10 @@ const rollupify = async (input, name = '') => {
         commonjs({
           include: 'node_modules/**',
           sourceMap: false,
+        }),
+        rjson({
+          preferConst: true,
+          indent: '  ',
         }),
         cleanup(),
       ],

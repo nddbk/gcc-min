@@ -1,6 +1,6 @@
 /**
  * math@1.0.0
- * built on: Tue, 27 Aug 2019 15:06:41 GMT
+ * built on: Sat, 14 Sep 2019 09:45:53 GMT
  * repository: https://somewhere.com/math
  * maintainer: @ndaidong
  * License: MIT
@@ -16,6 +16,30 @@
 
   const sub = (a, b) => {
     return a - b;
+  };
+
+  const version = "1.0.0";
+  const name = "math";
+  const description = "Simple math";
+  const main = "./index.js";
+  const engines = {
+    node: ">= 7.6"
+  };
+  const repository = {
+    type: "git",
+    url: "https://somewhere.com/math"
+  };
+  const author = "@ndaidong";
+  const license = "MIT";
+  var pkg = {
+    version: version,
+    name: name,
+    description: description,
+    main: main,
+    engines: engines,
+    repository: repository,
+    author: author,
+    license: license
   };
 
   const compose = (...fns) => {
@@ -44,10 +68,14 @@
   };
   const tMap = new Map();
   const tSet = new Set();
+  const getPackage = () => {
+    return pkg;
+  };
 
   exports.add = add;
   exports.compose = compose;
   exports.curry = curry;
+  exports.getPackage = getPackage;
   exports.pipe = pipe;
   exports.sub = sub;
   exports.tMap = tMap;
