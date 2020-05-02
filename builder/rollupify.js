@@ -5,9 +5,9 @@ const info = debug('gccmin:info');
 const error = debug('gccmin:error');
 
 const {rollup} = require('rollup');
-const nodeResolve = require('rollup-plugin-node-resolve');
-const commonjs = require('rollup-plugin-commonjs');
-const rjson = require('rollup-plugin-json');
+const nodeResolve = require('@rollup/plugin-node-resolve');
+const commonjs = require('@rollup/plugin-commonjs');
+const rjson = require('@rollup/plugin-json');
 const cleanup = require('rollup-plugin-cleanup');
 const terser = require('terser');
 
