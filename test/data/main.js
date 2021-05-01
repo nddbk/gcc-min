@@ -21,7 +21,7 @@ export const curry = (fn) => {
           [
             ...rest,
             ...args,
-          ]
+          ],
         );
       };
     }

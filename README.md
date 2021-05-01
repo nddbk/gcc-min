@@ -3,7 +3,7 @@ Simplify package building process with Rollup.
 Just write the mudules using ES6 Modules syntax, and let's gcc-min build them to a single file.
 
 [![NPM](https://badge.fury.io/js/gcc-min.svg)](https://badge.fury.io/js/gcc-min)
-[![Build Status](https://travis-ci.org/ndaidong/gcc-min.svg?branch=master)](https://travis-ci.org/ndaidong/gcc-min)
+![CI test](https://github.com/ndaidong/gcc-min/workflows/ci-test/badge.svg)
 
 
 ## Usage
